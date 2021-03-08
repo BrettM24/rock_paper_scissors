@@ -13,7 +13,7 @@
     function computerPlay(){
     //  Generate random int between 1 and 3(i.e 1,2 or 3)
       //  Math.random gives random float between 0 and 1
-      //  Times this by max less min + 1. Therefore if random = 0.8, our value will equal 0.8*3 = 2.4
+      //  Times this by (max less min) plus 1. Therefore if random = 0.8, our value will equal 0.8*3 = 2.4
       //  Use floor to round down, to get to int. Then add 1 as this is the min value(incase floor result = 0)  
       randInt = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
 
@@ -69,11 +69,126 @@
         }
       }  
     }
+    //Function to play a round
+      //Input will be player and computer choice respectively
+    function oneRound(player_choice, comp_choice){
+      //Function compares choices, uses game logic to decide who won. 
+      //Will use switch nested in if/else if/else statements
 
+      //varaible declared to be returned. Returned at end of switch statement in if/else if/else
+      let round_result;
 
+      //If player choice = Rock
 
-    //x = playerChoose();
-    //alert(x);
+      if(player_choice == "Rock"){
+        switch(comp_choice){
+          case "Rock":
+            round_result = "Draw";
+            return round_result;
+          case "Paper":
+            round_result = "You Lose! Paper beats Rock";
+            return round_result;
+          case "Scissors":
+            round_result = "You Win! Rock beats Scissors";
+            return round_result;
+        }
+      //Player choice = Paper
+      }else if(player_choice == "Paper"){
+        switch(comp_choice){
+          case "Paper":
+            round_result = "Draw";
+            return round_result;
+          case "Rock":
+            round_result = "You Win! Paper beats Rock";
+            return round_result;
+          case "Scissors":
+            round_result = "You Lose! Scissors beats Paper";
+            return round_result;
+        }
+      //Player choice = Scissors
+      }else{
+        switch(comp_choice){
+          case "Scissors":
+            round_result = "Draw";
+            return round_result;
+          case "Rock":
+            round_result = "You Lose! Rock beats Scissors";
+            return round_result;
+          case "Paper":
+            round_result = "You Win! Scissors beats Paper";
+            return round_result;
+        }
+      }
+    }
+
+    //Function to play a game.
+    //Game will be best out of 5 therefore first opponent to get to 3.
+    //Will run above functions within it
+    //If draw, will not count towards 5
+    function game(){
+    //1. Ask player if they want to play best to 5
+      let start_0 = prompt("Want to play best to 5?: ");
+      let start_1;
+        switch(start_0){
+          case "Yes":
+          case "yes":
+          case "YES":
+            start_1 = "Yes";
+            break;
+          case "No":
+          case "no":
+          case "NO":
+            start_1 = "No";
+            break;
+        }
+
+    //2. If Yes
+      if(start_1 == "Yes"){
+      //Initiate score keeping
+        let score_player = 0;
+        let score_comp = 0;
+      //Play rounds
+        //Will run while loop whilst either opponent is below 3
+        while(score_player < 3 && score_comp < 3){
+          console.log(score_player);
+          console.log(score_comp);
+          let round_result = oneRound(playerChoose(), computerPlay());
+          //Switch that updates opponents score based on result of round
+          switch(round_result){
+            case "You Win! Rock beats Scissors"://Player wins
+            case "You Win! Paper beats Rock":
+            case "You Win! Scissors beats Paper":
+              alert(round_result);
+              console.log(round_result);
+              score_player += 1;
+              continue;
+            case "Draw":
+              alert(round_result);//Draw
+              console.log(round_result);
+              continue; 
+            case "You Lose! Paper beats Rock"://Computer wins
+            case "You Lose! Scissors beats Paper":
+            case "You Lose! Rock beats Scissors":
+              alert(round_result);
+              console.log(round_result);
+              score_comp += 1;
+              continue;
+          }
+        }
+      //Give final result when opponent reaches 3
+        if(score_player == 3){
+          console.log("You won!")
+        }else{
+          console.log("Computer won :(")
+        }
+      }
+    //3. If No
+      if(start_1 != "Yes"){
+        alert("See ya later")
+        console.log("See ya later");
+      }
+    }
+    game();
   </script>
 </body>
 </html>
