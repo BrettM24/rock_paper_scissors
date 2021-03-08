@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+  <meta charset="UTF-8"/>
+</head>
+<body>
+  <script>
+    // Your JavaScript goes here!
+    
+    // 1. Create function which generate computer's selection
+
+    function computerPlay(){
+    //  Generate random int between 1 and 3(i.e 1,2 or 3)
+      //  Math.random gives random float between 0 and 1
+      //  Times this by max less min + 1. Therefore if random = 0.8, our value will equal 0.8*3 = 2.4
+      //  Use floor to round down, to get to int. Then add 1 as this is the min value(incase floor result = 0)  
+      randInt = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+
+    //  1 = Rock, 2 = Paper, 3 = Scissors
+      let compChoice;
+      switch(randInt){
+        case 1:
+          compChoice = "Rock";
+          break;
+        case 2:
+          compChoice = "Paper";
+          break;
+        case 3:
+          compChoice = "Scissors";
+          break;
+      }
+    //  Return computer's result 
+      return compChoice;
+    }
+
+    // 2. Create function to take in player's choice
+    function playerChoose(){
+      //Putting this in a loop, as we want computer to ask user to input again if invalid answer given
+      //Will use while loop, with falsy quality until valid answer given
+      //When valid answer given, will "return" and therefore exit function, do not therefore need to exit while loop
+      let i = 1;
+      while(i>0){
+      //prompt player to input choice, make into variable
+        let playerChoice_0 = prompt("Rock, Paper or Scissors");
+        //assess whether input is valid -> will be done using switch
+        //declare player_choice_1, will be used to return choice in correct format, for now set to undefined
+        let playerChoice_1;
+        switch(playerChoice_0){
+        //if valid, return -> in the form of: No spaces, capital 1st letter
+          case "Rock":
+          case "rock":
+          case "ROCK":
+            playerChoice_1 = "Rock";
+            return playerChoice_1;
+          case "Paper":
+          case "paper":
+          case "PAPER":
+            playerChoice_1 = "Paper";
+            return playerChoice_1;
+          case "Scissors":
+          case "scissors":
+          case "SCISSORS":  
+            playerChoice_1 = "Scissors";
+            return playerChoice_1; 
+          //otherwise prompt user to input answer again 
+          default:
+            alert("Invalid input, please try again") 
+        }
+      }  
+    }
+
+
+
+    //x = playerChoose();
+    //alert(x);
+  </script>
+</body>
+</html>
